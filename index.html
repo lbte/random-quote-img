@@ -30,7 +30,7 @@
     <script>
         async function fetchRandomImage() {
             try {
-                const response = await fetch('http://127.0.0.1:5000/random-image');
+                const response = await fetch('https://random-quote-img.onrender.com/random-image');
                 const data = await response.json();
                 const imgElement = document.getElementById("quoteImage");
                 imgElement.src = data.image_url;
