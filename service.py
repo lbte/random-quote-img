@@ -12,7 +12,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Enable CORS for all routes
-# CORS(app, origins=["http://your-frontend-domain.com"])
+# CORS(app, origins=["http://frontend-domain.com"]) -> limit the access
 CORS(app)
 
 # Unsplash API configuration
@@ -46,7 +46,7 @@ def fetch_new_image():
 
 # Schedule the image fetching task
 scheduler = BackgroundScheduler()
-# Schedule the fetch to run daily at 6:00 AM (adjust as needed)
+# Schedule the fetch to run daily at 6:00 AM
 scheduler.add_job(fetch_new_image, 'cron', hour=6, minute=0, second=0)
 scheduler.start()
 
