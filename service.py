@@ -66,4 +66,4 @@ def get_random_image():
 if __name__ == '__main__':
     # Fetch an image immediately on startup
     fetch_new_image()
-    app.run(debug=True)
+    app.run()
