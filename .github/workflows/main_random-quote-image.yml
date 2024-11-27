@@ -75,5 +75,5 @@ jobs:
           app-name: 'random-quote-image'
 
       - name: Confirm Deployment
-        run: echo "App deployed to Azure Web App: ${{ steps.deploy-to-webapp.outputs.webapp-url }}"
+        run: echo "App deployed to Azure Web App."
           
