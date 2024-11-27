@@ -1,7 +1,7 @@
 <div style="text-align: center;">
     <img id="quote-image" alt="Daily Quote Image" style="max-width: 100%; height: auto;" />
     <script>
-      fetch('https://random-quote-img.onrender.com/random-image')
+      fetch('https://random-quote-image-eqf9czdxdjaafgdk.eastus2-01.azurewebsites.net/random-image')
         .then(response => response.json())
         .then(data => {
           document.getElementById('quote-image').src = data.image_url;
