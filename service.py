@@ -46,8 +46,8 @@ def fetch_new_image():
 
 # Schedule the image fetching task
 scheduler = BackgroundScheduler()
-# Schedule the fetch to run daily at 6:00 AM
-scheduler.add_job(fetch_new_image, 'cron', hour=6, minute=0, second=0)
+# Schedule the fetch to run daily at 8:00 AM
+scheduler.add_job(fetch_new_image, 'cron', hour=8, minute=0, second=0)
 scheduler.start()
 
 @app.route('/random-image', methods=['GET'])
