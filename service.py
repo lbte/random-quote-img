@@ -30,6 +30,8 @@ def fetch_new_image():
     Fetch a new random image from the Unsplash API and update the cache.
     """
     global cached_image
+    print("FETCHING RANDOM IMAGE...")
+    print(cached_image)
     try:
         response = requests.get(UNSPLASH_API_URL, params={
             "client_id": UNSPLASH_ACCESS_KEY,
