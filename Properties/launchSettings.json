@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "random_image_fetcher": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7040",
+      "launchBrowser": false
+    }
+  }
+}
