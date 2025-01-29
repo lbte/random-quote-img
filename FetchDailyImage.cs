@@ -14,7 +14,7 @@ public static class FetchDailyImage
 
     [FunctionName("FetchDailyImage")]
     public static async Task Run(
-        [TimerTrigger("0 20 21 * * *")] TimerInfo myTimer, // Runs daily at midnight
+        [TimerTrigger("0 27 21 * * *")] TimerInfo myTimer, // Runs daily at midnight
         ILogger log)
     {
         string unsplashAccessKey = Environment.GetEnvironmentVariable("UNSPLASH_ACCESS_KEY");
@@ -40,7 +40,7 @@ public static class FetchDailyImage
             log.LogError($"Unsplash API error: {response.StatusCode}");
             return;
         }
-        
+
         var imageData = await response.Content.ReadAsAsync<dynamic>();
         string imageUrl = imageData.urls.regular;
 
