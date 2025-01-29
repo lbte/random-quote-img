@@ -10,15 +10,16 @@ namespace random_image_fetcher;
 
 public static class FetchDailyImage
 {
-    private static readonly HttpClient httpClient = new HttpClient();
+    private static readonly HttpClient httpClient = new();
 
     [FunctionName("FetchDailyImage")]
     public static async Task Run(
-        [TimerTrigger("0 27 21 * * *")] TimerInfo myTimer, // Runs daily at midnight
+        [TimerTrigger("0 0 0 * * *")] TimerInfo timer, // Runs daily at midnight
         ILogger log)
     {
         string unsplashAccessKey = Environment.GetEnvironmentVariable("UNSPLASH_ACCESS_KEY");
         string blobConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+
         if (string.IsNullOrEmpty(unsplashAccessKey))
         {
             log.LogError("Unsplash API Key is missing.");

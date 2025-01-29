@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Mvc;
@@ -18,12 +17,15 @@ public static class GetDailyImage
         ILogger log)
     {
         string blobConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+
         // Get the latest image from Azure Blob Storage
         var blobServiceClient = new BlobServiceClient(blobConnectionString);
         var blobClient = blobServiceClient.GetBlobContainerClient("images").GetBlobClient($"{DateTime.Today:yyyy-MM-dd}.jpg");
+
         // Generate the embeddable HTML snippet
         string imageUrl = blobClient.Uri.ToString();
         string htmlSnippet = $"<img src=\"{imageUrl}\" alt=\"Daily Motivational Quote\" />";
+
         return new ContentResult
         {
             Content = htmlSnippet,
