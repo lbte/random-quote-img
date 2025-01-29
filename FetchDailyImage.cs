@@ -14,7 +14,7 @@ public static class FetchDailyImage
 
     [FunctionName("FetchDailyImage")]
     public static async Task Run(
-        [TimerTrigger("0 0 16 * * *")] TimerInfo myTimer, // Runs daily at midnight
+        [TimerTrigger("0 5 21 * * *")] TimerInfo myTimer, // Runs daily at midnight
         ILogger log)
     {
         string unsplashAccessKey = Environment.GetEnvironmentVariable("UNSPLASH_ACCESS_KEY");
