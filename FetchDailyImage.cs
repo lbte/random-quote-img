@@ -14,15 +14,33 @@ public static class FetchDailyImage
 
     [FunctionName("FetchDailyImage")]
     public static async Task Run(
-        [TimerTrigger("0 15 21 * * *")] TimerInfo myTimer, // Runs daily at midnight
+        [TimerTrigger("0 20 21 * * *")] TimerInfo myTimer, // Runs daily at midnight
         ILogger log)
     {
         string unsplashAccessKey = Environment.GetEnvironmentVariable("UNSPLASH_ACCESS_KEY");
         string blobConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+        if (string.IsNullOrEmpty(unsplashAccessKey))
+        {
+            log.LogError("Unsplash API Key is missing.");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(blobConnectionString))
+        {
+            log.LogError("Azure Storage Connection String is missing.");
+            return;
+        }
 
         // Fetch a random image from Unsplash
         var UNSPLASH_API_URL = "https://api.unsplash.com/photos/random";
         var response = await httpClient.GetAsync($"{UNSPLASH_API_URL}?collections=70076102&orientation=portrait&client_id={unsplashAccessKey}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            log.LogError($"Unsplash API error: {response.StatusCode}");
+            return;
+        }
+        
         var imageData = await response.Content.ReadAsAsync<dynamic>();
         string imageUrl = imageData.urls.regular;
 
