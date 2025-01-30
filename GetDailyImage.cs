@@ -24,7 +24,7 @@ public static class GetDailyImage
 
         // Generate the embeddable HTML snippet
         string imageUrl = blobClient.Uri.ToString();
-        string htmlSnippet = $"<img src=\"{imageUrl}\" alt=\"Daily Motivational Quote\" />";
+        string htmlSnippet = $"<img src=\"{imageUrl}\" alt=\"Daily Quote Image\" />";
 
         return new ContentResult
         {
