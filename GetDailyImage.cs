@@ -22,13 +22,41 @@ public static class GetDailyImage
         var blobServiceClient = new BlobServiceClient(blobConnectionString);
         var blobClient = blobServiceClient.GetBlobContainerClient("images").GetBlobClient($"{DateTime.Today:yyyy-MM-dd}.jpg");
 
-        // Generate the embeddable HTML snippet
-        string imageUrl = blobClient.Uri.ToString();
-        string htmlSnippet = $"<img src=\"{imageUrl}\" alt=\"Daily Quote Image\" />";
+        string imageUrl = $"{blobClient.Uri}?v={DateTime.UtcNow.Ticks}"; // Cache-busting URL
+
+        // Return a full HTML page for better embedding support
+        string htmlPage = $@"
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Daily Quote Image</title>
+            <style>
+                body {{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    margin: 0;
+                    background-color: #f8f9fa;
+                }}
+                img {{
+                    max-width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }}
+            </style>
+        </head>
+        <body>
+            <img src='{imageUrl}' alt='Daily Quote Image' />
+        </body>
+        </html>";
+
 
         return new ContentResult
         {
-            Content = htmlSnippet,
+            Content = htmlPage,
             ContentType = "text/html"
         };
     }
