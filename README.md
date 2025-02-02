@@ -1,6 +1,11 @@
 # **Daily Quote Image**  
 A **serverless API** that delivers a **random quote image** daily, fetched from Unsplash and cached in Azure Blob Storage. The API provides an **embeddable HTML snippet**, allowing seamless integration into tools like Notion.  
 
+**Example of integration with Notion:**
+In the current Notion page we can see that when it loads again (after going to another page and then going back), the image changed, as the time for the Timer Azure Function to be executed was 7PM UTC-05.
+
+![demo-notion](demo.gif)
+
 ## 🚀 **Features**
 - **Automated Daily Image Fetching**: A scheduled Azure Function retrieves a **new quote image** from Unsplash every day.  
 - **Cached Image Delivery**: The API serves the **stored image**, reducing API calls to Unsplash.  
